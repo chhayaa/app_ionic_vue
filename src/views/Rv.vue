@@ -14,6 +14,7 @@
       <ion-toolbar>
         <ion-title>
           <h3 class="title">Your Rv's</h3>
+          <!-- {{ maxPage.maxPage }} -->
         </ion-title>
       </ion-toolbar>
 
@@ -103,6 +104,7 @@ export default {
   data() {
     return {
       totalRvs: [],
+      maxPage: [],
     };
   },
 
@@ -115,12 +117,14 @@ export default {
         method: "POST",
         url: "http://localhost:3000/Rv/search",
         headers: { "Content-Type": "application/json" },
-        data: { creator: "507f1f77bcf86cd799439014", page: 4 },
+        data: { creator: "507f1f77bcf86cd799439014", page: 1 },
       };
       const data = await axios.request(options);
 
       this.totalRvs = data.data.data;
-      // console.log(this.totalRvs);
+      this.maxPage = data.data;
+      console.log(this.maxPage);
+      console.log(this.totalRvs);
     },
 
     async openAddRv() {

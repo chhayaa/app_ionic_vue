@@ -13,7 +13,7 @@
           v-for="room in roomList"
           v-bind:key="room._id"
         >
-          <ion-item class="ion-margin-bottom">
+          <ion-item class="ion-margin-bottom" href="/post">
             <ion-avatar slot="start">
               <img
                 src="https://essblog.wpengine.com/wp-content/uploads/2020/05/rv-renovation-ideas.jpg"
