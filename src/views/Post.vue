@@ -48,10 +48,11 @@
           </ion-label>
 
           <div class="container">
-            <img
+            <!-- <img
               class="post-img"
               src="http://images2.fanpop.com/images/photos/5400000/Random-Food-random-5409310-1280-800.jpg"
-            />
+            /> -->
+            {{ post.image }}
           </div>
         </ion-item>
       </ion-card>
