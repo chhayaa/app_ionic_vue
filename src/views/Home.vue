@@ -1,68 +1,128 @@
 <template>
   <ion-page>
-    <ion-header :translucent="true">
+    <!-- <ion-header :translucent="true"> </ion-header> -->
+    <ion-toolbar class="ion-no-border">
+      <ion-item class="ion-no-padding ion-no-border">
+        <ion-avatar slot="end">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ492AnNAAPJR3tuNh9iojWzyaVnyeQ3mApIw&usqp=CAU"
+          />
+        </ion-avatar>
+      </ion-item>
+    </ion-toolbar>
+    <ion-content class="ion-padding">
       <ion-toolbar>
-        <ion-title>Blank</ion-title>
+        <ion-title>
+          <h3 class="title">Your Rv's</h3>
+        </ion-title>
       </ion-toolbar>
-    </ion-header>
-    
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">Blank</ion-title>
-        </ion-toolbar>
-      </ion-header>
-    
-      <div id="container">
-        <strong>Ready to create an app?</strong>
-        <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-      </div>
+
+      <ion-list
+        class="ion-padding-top"
+        v-for="Rv in totalRvs"
+        v-bind:key="Rv._id"
+      >
+        <ion-item class="ion-no-padding ion-margin-bottom" href="/room">
+          <ion-avatar slot="start">
+            <img
+              src="https://st.depositphotos.com/1203257/1763/i/950/depositphotos_17637335-stock-photo-yellowstone-rv-trip.jpg"
+            />
+          </ion-avatar>
+
+          <ion-label>{{ Rv.name }}</ion-label>
+          <ion-badge color="primary" class="ion-margin-end">10+</ion-badge>
+          <div>
+            <div class="circle">
+              <ion-text color="light">
+                <ion-icon src="/assets/icon/share.svg"></ion-icon>
+              </ion-text>
+            </div>
+            <div class="small">
+              Share
+            </div>
+          </div>
+        </ion-item>
+      </ion-list>
     </ion-content>
   </ion-page>
 </template>
 
-<script lang="ts">
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'Home',
-  components: {
-    IonContent,
-    IonHeader,
+<script>
+import {
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonHeader,
+  IonContent,
+  IonIcon,
+  IonAvatar,
+  IonButton,
+  IonModal,
+  IonBadge,
+  IonFab,
+  IonFabButton,
+} from "@ionic/vue";
+import { add } from "ionicons/icons";
+import axios from "axios";
+export default {
+  name: "Rv",
+  component: {
     IonPage,
+    IonToolbar,
     IonTitle,
-    IonToolbar
-  }
-});
+    IonHeader,
+    IonContent,
+    IonIcon,
+    IonAvatar,
+    IonButton,
+    IonModal,
+    IonBadge,
+    IonFab,
+    IonFabButton,
+  },
+  setup() {
+    return {
+      add,
+    };
+  },
+
+  data() {
+    return {
+      totalRvs: [],
+    };
+  },
+
+  created() {
+    this.listOfRvs();
+  },
+  methods: {
+    async listOfRvs() {
+      const options = {
+        method: "POST",
+        url: "http://localhost:3000/Rv/search",
+        headers: { "Content-Type": "application/json" },
+        data: { creator: "507f1f77bcf86cd799439014", page: 4 },
+      };
+      const data = await axios.request(options);
+
+      this.totalRvs = data.data.data;
+      console.log(this.totalRvs);
+    },
+  },
+};
 </script>
 
 <style scoped>
-#container {
-  text-align: center;
-  
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+.circle {
+  width: 22px;
+  height: 22px;
+  background: #ffab01;
+  font-size: 12px;
+  border-radius: 50%;
+  padding: 4px;
+  margin: 0 auto;
 }
-
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-  
-  color: #8c8c8c;
-  
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
+.small {
+  font-size: 12px;
 }
 </style>
