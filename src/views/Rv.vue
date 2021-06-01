@@ -120,7 +120,7 @@ export default {
       const data = await axios.request(options);
 
       this.totalRvs = data.data.data;
-      console.log(this.totalRvs);
+      // console.log(this.totalRvs);
     },
 
     async openAddRv() {

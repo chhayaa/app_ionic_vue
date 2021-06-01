@@ -6,7 +6,7 @@
       </ion-toolbar> -->
     <!-- </ion-header> -->
     <ion-content fullscreen>
-      <ion-card class="main">
+      <ion-card class="main ion-no-padding ion-no-margin">
         <img
           class="img"
           src="https://imagebee.org/vehicles/motorhome/motorhome-3-1600x1060.jpg"
@@ -22,30 +22,31 @@
           <ion-grid>
             <div class="ui-buttons">
               <ion-row>
-                <ion-col class="ion-padding-top">
+                <ion-col class="ion-padding-top" size="6">
                   <div>
                     <ion-button
                       class="ui-button-toggle"
                       @click="toggle"
                       :class="[showSignUp ? 'active' : '']"
-                      style="width:160px "
-                      href="./SignUp"
+                      href="/signup"
                       color="warning"
                       shape="round"
                       fill="solid"
-                      >Sign Up</ion-button
                     >
+                      <ion-text color="light">
+                        Sign Up
+                      </ion-text>
+                    </ion-button>
                   </div>
                 </ion-col>
-                <ion-col class="ion-padding-top">
+                <ion-col class="ion-padding-top" size="6">
                   <div>
                     <ion-button
                       class="ui-button-toggle"
                       @click="toggle"
                       :class="[!showSignUp ? 'active' : '']"
-                      style="width:160px"
                       color="warning"
-                      href="./Login"
+                      href="/login"
                       shape="round"
                       fill="outline"
                       >Login</ion-button
@@ -60,7 +61,7 @@
               <ion-button class="googleBtn" href="" shape="round" color="light"
                 ><ion-icon
                   slot="start"
-                  name="logo-google"
+                  src="/assets/icon/google-icon.svg"
                   color="primary"
                 ></ion-icon
                 >Login with Google</ion-button
@@ -87,6 +88,7 @@ import {
 } from "@ionic/vue";
 
 import { defineComponent } from "vue";
+import { logoGoogle } from "ionicons/icons";
 
 export default defineComponent({
   name: "Home",
@@ -102,7 +104,9 @@ export default defineComponent({
     IonCol,
   },
   setup() {
-    return {};
+    return {
+      logoGoogle,
+    };
   },
   data() {
     return {
