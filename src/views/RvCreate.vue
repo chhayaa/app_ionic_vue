@@ -18,7 +18,7 @@
           placeholder="Family Rv"
           class="bg-custom"
           name="name"
-          v-model="rvData.name"
+          ng-model="rvData.name"
         />
       </div>
 
