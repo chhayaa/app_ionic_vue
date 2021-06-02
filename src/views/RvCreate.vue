@@ -10,14 +10,13 @@
         <ion-title>Add an Rv</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content class="ion-padding" v-if="rvData">
+    <ion-content class="ion-padding">
       <div class="ion-padding-vertical input-universal">
         <ion-label>Name Of Rv </ion-label>
-        <input
+        <ion-input
           type="text"
           placeholder="Family Rv"
           class="bg-custom"
-          name="name"
           ng-model="rvData.name"
         />
       </div>
@@ -27,7 +26,7 @@
         <ion-input
           placeholder="Add an Image"
           class="bg-custom"
-          v-model="rvData.image"
+          ng-model="rvData.image"
         ></ion-input>
       </div>
       <div class="ion-text-center ion-padding-vertical">
@@ -81,7 +80,7 @@ export default {
 
   data() {
     return {
-      rvData: { name: "abc", image: "" },
+      rvData: { name: " ", image: "" },
       message: { name: "" },
     };
   },
