@@ -7,6 +7,7 @@ import Room from "../views/Room.vue";
 import SignUp from "../views/SignUp.vue";
 import Login from "../views/Login.vue";
 import Post from "../views/Post.vue";
+import RvCreate from "../views/RvCreate.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -27,6 +28,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/rv",
     name: "Rv",
     component: Rv,
+  },
+  {
+    path:"/rvCreate",
+    name: "RvCreate",
+    component: RvCreate,
   },
   {
     path: "/room",

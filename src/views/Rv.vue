@@ -44,18 +44,21 @@
           </div>
         </ion-item>
       </ion-list>
-      <ion-fab
-        style="margin-bottom:60px"
-        @click="openAddRv"
-        horizontal="end"
-        vertical="bottom"
-        slot="fixed"
-      >
-        <ion-fab-button color="primary" style="margin:auto">
-          <ion-icon :icon="add"></ion-icon>
-        </ion-fab-button>
-        <h6>Add an RV</h6>
-      </ion-fab>
+      <router-link :to="{ name: 'RvCreate' }">
+        <ion-fab
+          style="margin-bottom:60px"
+          horizontal="end"
+          vertical="bottom"
+          slot="fixed"
+        >
+          <!-- @click="openAddRv" -->
+          <ion-fab-button color="primary" style="margin:auto">
+            <ion-icon :icon="add"></ion-icon>
+          </ion-fab-button>
+          <h6>Add an RV</h6>
+        </ion-fab>
+      </router-link>
+
       <ion-infinite-scroll
         @ionInfinite="loadData($event)"
         threshold="15%"
