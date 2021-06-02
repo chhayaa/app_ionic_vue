@@ -12,13 +12,22 @@
     </ion-header>
     <ion-content class="ion-padding">
       <div class="ion-padding-vertical input-universal">
-        <ion-label>Name Of Rv</ion-label>
-        <ion-input placeholder="Family Rv" class="bg-custom"></ion-input>
+        <ion-label>Name Of Rv {{ rvData }}</ion-label>
+        <ion-input
+          type="text"
+          placeholder="Family Rv"
+          class="bg-custom"
+          v-model="rvData.name"
+        ></ion-input>
       </div>
 
       <div class="ion-padding-vertical input-universal">
         <ion-label>Add an Image</ion-label>
-        <ion-input placeholder="Add an Image" class="bg-custom"></ion-input>
+        <ion-input
+          placeholder="Add an Image"
+          class="bg-custom"
+          v-model="rvData.image"
+        ></ion-input>
       </div>
       <div class="ion-text-center ion-padding-vertical">
         <ion-button shape="round" fill="outline" color="primary" size="medium">
@@ -32,7 +41,7 @@
       </div>
       <div class="ion-text-center">
         <ion-button
-          @click="closeRvAddModal()"
+          @click="createRv()"
           color="primary"
           shape="round"
           size="medium"
@@ -53,6 +62,7 @@ import {
   modalController,
 } from "@ionic/vue";
 import { arrowBack } from "ionicons/icons";
+import axios from "axios";
 export default {
   name: "RvModal",
   components: {
@@ -64,9 +74,33 @@ export default {
   setup() {
     return { arrowBack };
   },
+
+  data() {
+    return {
+      rvData: {},
+    };
+  },
   methods: {
     closeRvAddModal() {
       modalController.dismiss();
+    },
+
+    async createRv() {
+      const options = {
+        method: "POST",
+        url: "http://localhost:3000/RV/create",
+        headers: { "Content-Type": "application/json" },
+        data: {
+          name: "chhaya",
+          image: "",
+          creator: "507f1f77bcf86cd799439014",
+        },
+      };
+
+      const createdRv = await axios.request(options);
+      this.console.log(createdRv);
+      // console.log(this.familyRvName);
+      this.closeRvAddModal();
     },
   },
 };

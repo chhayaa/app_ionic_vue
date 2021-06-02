@@ -18,10 +18,6 @@
         </ion-title>
       </ion-toolbar>
 
-      <ion-button @click="toggleInfiniteScroll" expand="block">
-        Toggle Infinite Scroll
-      </ion-button>
-
       <ion-list
         class="ion-padding-top"
         v-for="Rv in totalRvs"
@@ -61,8 +57,8 @@
         <h6>Add an RV</h6>
       </ion-fab>
       <ion-infinite-scroll
-        @ionInfinite="loadMore($event)"
-        threshold="100px"
+        @ionInfinite="loadData($event)"
+        threshold="15%"
         id="infinite-scroll"
         :disabled="isDisabled"
       >
@@ -129,22 +125,49 @@ export default {
 
   data() {
     return {
-      page: 0,
+      page: 1,
       totalRvs: [],
       pageCount: [],
     };
   },
 
   created() {
-    this.loadMore();
+    //  this.loadData();
+    this.listOfRvs(this.page);
   },
   methods: {
-    loadMore() {
-      this.page = this.page + 1;
+    // loadData() {
+    //   this.page++;
+    //   this.listOfRvs(this.page);
+    //   console.log(this.page);
+    // },
+    // async listOfRvs(page) {
+    //   console.log(page);
+    //   const options = {
+    //     method: "POST",
+    //     url: "http://localhost:3000/Rv/search",
+    //     headers: { "Content-Type": "application/json" },
+    //     data: { creator: "507f1f77bcf86cd799439014", page: this.page },
+    //   };
+    //   const data = await axios.request(options);
+
+    //   data.data.data.forEach((element) => {
+    //     this.totalRvs.push(element);
+    //     // console.log(element);
+    //   });
+    //   // this.totalRvs = data.data.data;
+    //   this.pageCount = data.data;
+    //   this.maxPage = this.pageCount.maxPage;
+    //   console.log(this.page);
+    // },
+
+    loadData() {
+      this.page++;
       this.listOfRvs(this.page);
     },
     async listOfRvs(page) {
       console.log(page);
+
       const options = {
         method: "POST",
         url: "http://localhost:3000/Rv/search",
@@ -155,6 +178,7 @@ export default {
 
       data.data.data.forEach((element) => {
         this.totalRvs.push(element);
+        // console.log(element);
       });
       // this.totalRvs = data.data.data;
       this.pageCount = data.data;
